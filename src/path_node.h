@@ -1,6 +1,6 @@
 
-#ifndef ESTIMATOR_NODE_H
-#define ESTIMATOR_NODE_H
+#ifndef PATH_NODE_H
+#define PATH_NODE_H
 
 #include <boost/bind.hpp>
 #include <Eigen/Eigen>
@@ -49,4 +49,4 @@ class PathNode {
       const geometry_msgs::PoseStampedConstPtr& pose_msg);
 };
 
-#endif // ESTIMATOR_NODE_H
+#endif // PATH_NODE_H
