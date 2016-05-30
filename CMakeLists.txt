@@ -17,8 +17,8 @@ find_package(Eigen REQUIRED)
 generate_dynamic_reconfigure_options(cfg/Controller.cfg)
 
 catkin_package(
-  INCLUDE_DIRS include ${Eigen_INCLUDE_DIRS}
-  LIBRARIES 
+  INCLUDE_DIRS ${Eigen_INCLUDE_DIRS}
+  LIBRARIES
   CATKIN_DEPENDS geometry_msgs nav_msgs roscpp sensor_msgs dynamic_reconfigure mav_msgs
   DEPENDS Eigen
 )
@@ -35,6 +35,9 @@ add_executable(estimator_node src/estimator.cpp)
 add_dependencies(estimator_node ${catkin_EXPORTED_TARGETS})
 target_link_libraries(estimator_node ${catkin_LIBRARIES})
 
+add_executable(path_node src/path_node.cpp)
+add_dependencies(path_node ${catkin_EXPORTED_TARGETS})
+target_link_libraries(path_node ${catkin_LIBRARIES})
 
 add_executable(controller_node src/control.cpp)
 add_dependencies(controller_node ${catkin_EXPORTED_TARGETS})

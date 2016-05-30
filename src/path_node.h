@@ -14,41 +14,39 @@
 #include <sensor_msgs/Imu.h>
 #include <nav_msgs/Path.h>
 
-class EstimatorNode {
+class PathNode {
  public:
-  EstimatorNode();
-  ~EstimatorNode();
+  PathNode();
+  ~PathNode();
 
   void Publish();
 
  private:
 
-  // Define here the matrices and vectors of the Kalman filter
-  Eigen::Matrix3d example;
-
   // subscribers
-  ros::Subscriber pose_sub_;
-  ros::Subscriber imu_sub_;
+  ros::Subscriber gps_sub_;
   ros::Subscriber ground_truth_sub_;
+  ros::Subscriber estimator_sub_;
 
-  Eigen::Vector4d ground_truth_pose;
-
-  ros::Publisher pose_pub;
   geometry_msgs::PoseStamped msgPose_;
 
-  ros::Timer timer_;
+  // publishers
+  ros::Publisher PathKalmanFilter_pub_;
+  ros::Publisher PathFakeGPS_pub_;
+  ros::Publisher PathGroundTruth_pub_;
 
-  void PoseCallback(
+  nav_msgs::Path msgFakeGPSPath_;
+  nav_msgs::Path msgGroundTruthPath_;
+  nav_msgs::Path msgKalmanFilterPath_;
+
+  void FakeGPSCallback(
       const geometry_msgs::PoseStampedConstPtr& pose_msg);
-
-  void ImuCallback(
-      const sensor_msgs::ImuConstPtr& imu_msg);
-
-  void TimedCallback(
-      const ros::TimerEvent& e);
 
   void GroundTruthCallback(
       const geometry_msgs::PoseStampedConstPtr &pose_msg);
+
+  void EstimatorCallback(
+      const geometry_msgs::PoseStampedConstPtr& pose_msg);
 };
 
 #endif // ESTIMATOR_NODE_H
