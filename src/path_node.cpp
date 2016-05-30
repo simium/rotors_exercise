@@ -7,10 +7,16 @@ PathNode::PathNode() {
   gps_sub_  = nh.subscribe("/firefly/fake_gps/pose", 1, &PathNode::FakeGPSCallback, this);
   ground_truth_sub_  = nh.subscribe("/firefly/ground_truth/pose", 1, &PathNode::GroundTruthCallback, this);
   estimator_sub_ = nh.subscribe("/firefly/pose", 1, &PathNode::EstimatorCallback, this);
+  //gps_sub_  = nh.subscribe("/xaircraft/fake_gps/pose", 1, &PathNode::FakeGPSCallback, this);
+  //ground_truth_sub_  = nh.subscribe("/xaircraft/ground_truth/pose", 1, &PathNode::GroundTruthCallback, this);
+  //estimator_sub_ = nh.subscribe("/xaircraft/pose", 1, &PathNode::EstimatorCallback, this);
 
   PathKalmanFilter_pub_  =  nh.advertise<nav_msgs::Path>("/firefly/path/kf", 1);
   PathFakeGPS_pub_ =  nh.advertise<nav_msgs::Path>("/firefly/path/gps", 1);
   PathGroundTruth_pub_  =  nh.advertise<nav_msgs::Path>("/firefly/path/ground_truth", 1);
+  //PathKalmanFilter_pub_  =  nh.advertise<nav_msgs::Path>("/xaircraft/path/kf", 1);
+  //PathFakeGPS_pub_ =  nh.advertise<nav_msgs::Path>("/xaircraft/path/gps", 1);
+  //PathGroundTruth_pub_  =  nh.advertise<nav_msgs::Path>("/xaircraft/path/ground_truth", 1);
 }
 
 PathNode::~PathNode() { }

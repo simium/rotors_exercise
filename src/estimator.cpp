@@ -30,6 +30,14 @@ EstimatorNode::EstimatorNode() {
 
   ros::NodeHandle nh;
 
+  //pose_sub_ = nh.subscribe("/xaircraft/fake_gps/pose",  1, &EstimatorNode::PoseCallback, this);
+  //imu_sub_  = nh.subscribe("/xaircraft/imu",            1, &EstimatorNode::ImuCallback, this);
+
+  // Needed according to email from DSerrano (April 15th)
+  //ground_truth_sub_  = nh.subscribe("/xaircraft/ground_truth/pose",    1, &EstimatorNode::GroundTruthCallback, this);
+
+  //pose_pub = nh.advertise<geometry_msgs::PoseStamped>("/xaircraft/pose", 1);
+
   pose_sub_ = nh.subscribe("/firefly/fake_gps/pose",  1, &EstimatorNode::PoseCallback, this);
   imu_sub_  = nh.subscribe("/firefly/imu",            1, &EstimatorNode::ImuCallback, this);
 
